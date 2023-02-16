@@ -3,8 +3,8 @@
     <a class="navbar-brand" href="#">Recipe Book</a>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" href="#">Recipes</a></li>
-        <li><a class="nav-link active" href="#">Shopping list</a></li>
+        <li class="nav-item" (click)="onSelectFeature('recipe')"><a class="nav-link ref">Recipes</a></li>
+        <li class="nav-item" (click)="onSelectFeature('shopping-list')"><a class="nav-link ref">Shopping list</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item dropdown">
