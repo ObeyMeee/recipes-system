@@ -8,10 +8,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button">
+          <a [appDropdown]="dropdownMenu" class="nav-link dropdown-toggle" href="#" role="button">
             Manage
           </a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" #dropdownMenu>
             <li><a class="dropdown-item" href="#">Save data</a></li>
             <li><a class="dropdown-item" href="#">Fetch data</a></li>
           </ul>
