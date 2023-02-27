@@ -1,4 +1,4 @@
-import {Ingredient} from "../shared/Inghredient.model";
+import {Ingredient} from "../shared/Ingredient.model";
 
 export class Recipe {
   private static count = 0;
