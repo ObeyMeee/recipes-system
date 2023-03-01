@@ -16,8 +16,8 @@
             Manage
           </a>
           <ul class="dropdown-menu" #dropdownMenu>
-            <li><a class="dropdown-item ref">Save data</a></li>
-            <li><a class="dropdown-item ref">Fetch data</a></li>
+            <li><a class="dropdown-item ref" (click)="onSave()">Save data</a></li>
+            <li><a class="dropdown-item ref" (click)="onFetch()">Fetch data</a></li>
           </ul>
         </li>
       </ul>
