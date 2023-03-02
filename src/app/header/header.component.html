@@ -3,21 +3,27 @@
     <a class="navbar-brand" routerLink="/">Recipe Book</a>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAuthenticated">
           <a class="nav-link" routerLink="/recipes" routerLinkActive="active">Recipes</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/auth" routerLinkActive="active">Authentication</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/shopping-list" routerLinkActive="active">Shopping list</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item" *ngIf="isAuthenticated">
+          <a class="nav-link ref" (click)="onLogout()">Logout</a>
+        </li>
         <li class="nav-item dropdown">
           <a [appDropdown]="dropdownMenu" class="nav-link dropdown-toggle ref" role="button">
             Manage
           </a>
           <ul class="dropdown-menu" #dropdownMenu>
-            <li><a class="dropdown-item ref" (click)="onSave()">Save data</a></li>
-            <li><a class="dropdown-item ref" (click)="onFetch()">Fetch data</a></li>
+            <li><button class="dropdown-item ref" (click)="onSave()" [disabled]="!isAuthenticated">Save data</button></li>
+            <li><button class="dropdown-item ref" (click)="onFetch()" [disabled]="!isAuthenticated">Fetch data</button></li>
           </ul>
         </li>
       </ul>

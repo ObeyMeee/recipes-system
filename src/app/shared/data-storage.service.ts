@@ -20,13 +20,20 @@ export class DataStorageService {
   }
 
   fetchRecipes(): Observable<Recipe[]> {
-    return this.http.get<Recipe[]>(this.baseUrl)
-      .pipe(map(recipes => {
-          return recipes.map(recipe => {
-            return {...recipe, ingredients: recipe.ingredients || []};
-          })
-        }
-      ), tap(recipes => this.recipeService.recipes = recipes)
-      );
+    const recipesObs = this.getRecipes();
+    return recipesObs.pipe(
+      map(this.addEmptyIngredientsArrayIfNotExists),
+      tap(recipes => this.recipeService.recipes = recipes)
+    );
+  }
+
+  private getRecipes(): Observable<Recipe[]> {
+    return this.http.get<Recipe[]>(this.baseUrl);
+  }
+
+  private addEmptyIngredientsArrayIfNotExists(recipes: Recipe[]): Recipe[] {
+    return recipes.map(recipe => {
+      return {...recipe, ingredients: recipe.ingredients || []};
+    });
   }
 }
