@@ -1,12 +1,10 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { AuthMode } from './auth-mode.enum';
 import { AuthResponse } from './auth-response.interface';
 import { Router } from '@angular/router';
-import { PlaceholderDirective } from '../shared/directives/placeholder.directive';
-import { AlertComponent } from '../shared/components/alert/alert.component';
 
 @Component({
   selector: 'app-auth',
@@ -17,7 +15,6 @@ export class AuthComponent implements OnDestroy {
   authMode = AuthMode.LOGIN;
   isLoading = false;
   errorMessage: string | null = null;
-  @ViewChild(PlaceholderDirective) placeholder!: PlaceholderDirective;
   private closeAlertSubscription!: Subscription;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -43,16 +40,8 @@ export class AuthComponent implements OnDestroy {
   }
 
   handleError(error: Error): void {
-    // this.errorMessage = error.message;
+    this.errorMessage = error.message;
     this.isLoading = false;
-    const alertComponentRef =
-      this.placeholder.viewContainerRef.createComponent(AlertComponent);
-    const component = alertComponentRef.instance;
-    component.message = error.message;
-    this.closeAlertSubscription = component.closeEvent.subscribe(() => {
-      this.closeAlertSubscription.unsubscribe();
-      this.placeholder.viewContainerRef.remove();
-    });
   }
 
   private handleResponse(
@@ -67,9 +56,9 @@ export class AuthComponent implements OnDestroy {
     });
   }
 
-  // onHandleError() {
-  //   this.errorMessage = null;
-  // }
+  onHandleError() {
+    this.errorMessage = null;
+  }
 
   ngOnDestroy(): void {
     this.closeAlertSubscription?.unsubscribe();
