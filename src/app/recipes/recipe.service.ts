@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Recipe} from "./recipe.model";
-import {Ingredient} from "../shared/Ingredient.model";
-import {ShoppingListService} from "../shopping-list/shopping-list.service";
-import {Subject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/Ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class RecipeService {
@@ -19,13 +19,12 @@ export class RecipeService {
   //     'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
   //     [new Ingredient('Buns', 2), new Ingredient('Meat', 1)]
   //   )
-  // ];
-  private _recipes: Recipe[] = [];
   recipesChanged = new Subject<Recipe[]>();
 
-  constructor(private shoppingListService: ShoppingListService) {
+  constructor(private shoppingListService: ShoppingListService) {}
 
-  }
+  // ];
+  private _recipes: Recipe[] = [];
 
   get recipes(): Recipe[] {
     return this._recipes.slice();
@@ -41,7 +40,7 @@ export class RecipeService {
   }
 
   getById(id: number): Recipe {
-    return this.recipes.find(recipe => recipe.id === id)!;
+    return this.recipes.find((recipe) => recipe.id === id)!;
   }
 
   save(recipe: Recipe) {
@@ -54,16 +53,16 @@ export class RecipeService {
     this.triggerRecipesChangedEvent();
   }
 
-  private triggerRecipesChangedEvent() {
-    this.recipesChanged.next(this.recipes.slice());
-  }
-
   delete(id: number): void {
     this._recipes.splice(this.findIndex(id), 1);
     this.triggerRecipesChangedEvent();
   }
 
+  private triggerRecipesChangedEvent() {
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
   private findIndex(id: number): number {
-    return this.recipes.findIndex(rec => id === rec.id);
+    return this.recipes.findIndex((rec) => id === rec.id);
   }
 }
