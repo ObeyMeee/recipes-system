@@ -1,15 +1,15 @@
 <div class="row">
-  <div class="col-xs-12">
-    <img src="{{recipe.imagePath}}" alt="{{recipe.name}}" class="img-fluid">
+  <div class="col-xxl-12">
+    <img src="{{recipe.imagePath}}" alt="{{recipe.name}}" class="img-fluid pt-5" style="max-height: 400px">
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xxl-12">
     <h1>{{recipe.name}}</h1>
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xxl-12">
     <div class="btn-group">
       <button [appDropdown]="dropdownMenu" type="button" class="btn btn-primary dropdown-toggle">
         Manage Recipe <span class="caret"></span>
@@ -26,12 +26,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xxl-12">
     {{recipe.description}}
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xxl-12">
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">
         {{ingredient.name}} - {{ingredient.amount}}
