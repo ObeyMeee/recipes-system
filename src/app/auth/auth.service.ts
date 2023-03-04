@@ -4,13 +4,13 @@ import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { AuthResponse } from './auth-response.interface';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/evironment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl =
-    'https://identitytoolkit.googleapis.com/v1/accounts:action?key=AIzaSyB_lHzVMi6GQSiMp8zr48Te7ZjGfapvECg';
+  baseUrl = `https://identitytoolkit.googleapis.com/v1/accounts:action?key=${environment.firebaseApiKey}`;
   userSubject = new BehaviorSubject<User | null>(null);
   token = null;
   private tokenExpirationTimeoutId: number | undefined;
